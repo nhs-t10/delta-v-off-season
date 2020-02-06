@@ -110,6 +110,21 @@ public class MovementManager extends FeatureManager {
         stopDrive();
     }
 
+    public void driveWithVertical(float power, float distance) {
+        int ticks = PaulMath.encoderDistance(distance);
+        setTargetPositions(ticks, ticks, ticks, ticks);
+        runUsingEncoders();
+        if(Math.abs(frontLeft.getCurrentPosition()) < Math.abs(frontLeft.getTargetPosition()) &&
+                        Math.abs(frontRight.getCurrentPosition()) < Math.abs(frontRight.getTargetPosition()) &&
+                        Math.abs(backRight.getCurrentPosition()) < Math.abs(backRight.getTargetPosition()) &&
+                        Math.abs(backLeft.getCurrentPosition()) < Math.abs(backLeft.getTargetPosition())
+        ) {
+            driveRaw(power, power, power, power);
+            //Waiting for motor to finish
+        } else {
+            stopDrive();
+        }
 
+    }
 
 }
