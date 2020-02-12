@@ -59,6 +59,14 @@ public class MovementManager extends FeatureManager {
         driveRaw(sum[0], sum[1], sum[2], sum[3]);
     }
 
+    public void driveOmniExponential(float verticalPower, float horizontalPower, float rotationalPower) {
+        float[] sum = PaulMath.omniCalc(
+                (float)Math.pow(verticalPower, 2f),
+                (float)Math.pow(horizontalPower, 2f),
+                (float)Math.pow(rotationalPower, 2f));
+        driveRaw(sum[0], sum[1], sum[2], sum[3]);
+    }
+
     public void resetEncoders() {
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
