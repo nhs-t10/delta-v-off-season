@@ -54,16 +54,16 @@ public class MovementManager extends FeatureManager {
         backLeft.setPower(0);
     }
 
-    public void driveOmni(float verticalPower, float horizontalPower, float rotationalPower) {
-        float[] sum = PaulMath.omniCalc(verticalPower, horizontalPower, rotationalPower);
+    public void driveOmni(float[] powers) {
+        float[] sum = PaulMath.omniCalc(powers[0], powers[1], powers[2]);
         driveRaw(sum[0], sum[1], sum[2], sum[3]);
     }
 
     public void driveOmniExponential(float verticalPower, float horizontalPower, float rotationalPower) {
         float[] sum = PaulMath.omniCalc(
-                (float)Math.pow(verticalPower, 2f),
-                (float)Math.pow(horizontalPower, 2f),
-                (float)Math.pow(rotationalPower, 2f));
+                (float)Math.pow(verticalPower, EXPONENTIAL_SCALAR),
+                (float)Math.pow(horizontalPower, EXPONENTIAL_SCALAR),
+                (float)Math.pow(rotationalPower, EXPONENTIAL_SCALAR));
         driveRaw(sum[0], sum[1], sum[2], sum[3]);
     }
 

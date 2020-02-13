@@ -63,5 +63,9 @@ public class PaulMath extends FeatureManager {
         return counts;
     }
 
+    public static float delta(float one, float two) {
+        return Math.abs(one - two);
+    }
+
 
 }

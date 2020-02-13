@@ -16,5 +16,59 @@ public class FeatureManager {
     public final static double WHEEL_DIAMETER = 4;
     public final static double SLIP = 0.7;
     public final static double CIRCUMFERENCE = Math.PI * WHEEL_DIAMETER;
+    public final static float EXPONENTIAL_SCALAR = 2f;
 
+    public final static int INPUT_DOUBLECLICK_TIME = 400;
+
+    public static class ControlMap {
+        public final static Control MOVE_HORIZONTAL = new Control("left_stick_x");
+        public static final Control MOVE_VERTICAL = new Control("left_stick_y");
+        public static final Control MOVE_ROTATIONAL = new Control("right_stick_x");
+    }
 }
+
+    class Control {
+        public String on;
+        public String off;
+
+        public boolean isScalar;
+        public float value1;
+        public float value2;
+        public float value3;
+
+        boolean isNothing;
+
+        public Control(String _on, String _off, float v1, float v2, float v3) {
+            this.on = _on;
+            this.off = _off;
+
+            this.value1 = v1;
+            this.value2 = v2;
+            this.value3 = v3;
+            this.isScalar = false;
+        }
+        public Control(String _on, float v1, float v2) {
+            this.on = _on;
+            this.off = "";
+
+            this.value1 = v1;
+            this.value2 = v2;
+            this.isScalar = false;
+        }
+
+        public Control(String _on) {
+            this.on = _on;
+            this.off = "";
+            this.isScalar = true;
+        }
+
+        public Control(float val) {
+            this.on = "";
+            this.off = "";
+
+            this.isNothing = true;
+            this.value1 = val;
+        }
+
+
+    }
