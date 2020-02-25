@@ -33,7 +33,11 @@ public class Teleop extends OpMode {
     }
 
     public void loop() {
-        driver.driveOmni(input.getMovementControls());
+        if(!input.getGamepad().left_bumper) {
+            driver.driveOmni(input.getMovementControls());
+        } else {
+            driver.driveOmniExponential(input.getMovementControls());
+        }
 
         telemetry.addData("FL Ticks:", driver.frontLeft.getCurrentPosition());
         telemetry.addData("FR Ticks:", driver.frontRight.getCurrentPosition());
