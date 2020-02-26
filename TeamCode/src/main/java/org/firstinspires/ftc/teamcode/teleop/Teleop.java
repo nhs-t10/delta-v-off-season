@@ -17,6 +17,8 @@ public class Teleop extends OpMode {
     InputManager input;
     MovementManager driver;
     ColorSensor sensor;
+    Servo grab;
+    boolean grabBool = false;
 
 
     private static boolean toggleSpeed = false;
@@ -26,7 +28,8 @@ public class Teleop extends OpMode {
                 hardwareMap.get(DcMotor.class, "fr"),
                 hardwareMap.get(DcMotor.class, "bl"),
                 hardwareMap.get(DcMotor.class, "br"));
-        sensor = new ColorSensor(hardwareMap.get(NormalizedColorSensor.class, "sensor"));
+//        sensor = new ColorSensor(hardwareMap.get(NormalizedColorSensor.class, "sensor"));
+        grab = hardwareMap.get(Servo.class, "grab");
         input = new InputManager(gamepad1);
         driver.resetEncoders();
         driver.runUsingEncoders();
@@ -39,6 +42,16 @@ public class Teleop extends OpMode {
             driver.driveOmniExponential(input.getMovementControls());
         }
 
+        if(input.getGamepad().a){
+            if (!grabBool) {
+                grab.setPosition(1);
+                grabBool = true;
+            } else if (grabBool) {
+                grab.setPosition(0);
+                grabBool = false;
+            }
+        }
+
         telemetry.addData("FL Ticks:", driver.frontLeft.getCurrentPosition());
         telemetry.addData("FR Ticks:", driver.frontRight.getCurrentPosition());
         telemetry.addData("BL Ticks:", driver.backRight.getCurrentPosition());
@@ -48,7 +61,7 @@ public class Teleop extends OpMode {
                 driver.backLeft.getCurrentPosition()+
                 driver.backRight.getCurrentPosition())/4);
 
-
+        telemetry.addData("Servo Position", grab.getPosition());
 
         telemetry.addData("FL Power: ", driver.frontLeft.getPower());
         telemetry.addData("FL Port: ", driver.frontLeft.getPortNumber());

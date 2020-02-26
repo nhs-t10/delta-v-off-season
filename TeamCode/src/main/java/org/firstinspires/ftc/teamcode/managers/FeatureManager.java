@@ -16,7 +16,7 @@ public class FeatureManager {
     public final static double WHEEL_DIAMETER = 4;
     public final static double SLIP = 0.7;
     public final static double CIRCUMFERENCE = Math.PI * WHEEL_DIAMETER;
-    public final static float EXPONENTIAL_SCALAR = 2f;
+    public final static float EXPONENTIAL_SCALAR = 3f;
 
     public final static int INPUT_DOUBLECLICK_TIME = 400;
 
