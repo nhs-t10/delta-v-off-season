@@ -130,5 +130,10 @@ public class InputManager extends FeatureManager {
             else return control.value3;
         }
     }
+
+    public float generalToggle(String control, float up, float down) {
+        Control dynamicControl = new Control(control,up,down);
+        return this.resolveControl(dynamicControl);
+    }
 }
 

@@ -18,8 +18,6 @@ public class Teleop extends OpMode {
     MovementManager driver;
     ColorSensor sensor;
     Servo grab;
-    boolean grabBool = false;
-
 
     private static boolean toggleSpeed = false;
 
@@ -42,15 +40,8 @@ public class Teleop extends OpMode {
             driver.driveOmniExponential(input.getMovementControls());
         }
 
-        if(input.getGamepad().a){
-            if (!grabBool) {
-                grab.setPosition(1);
-                grabBool = true;
-            } else if (grabBool) {
-                grab.setPosition(0);
-                grabBool = false;
-            }
-        }
+        grab.setPosition(input.generalToggle("a", 0f, 1f));
+
 
         telemetry.addData("FL Ticks:", driver.frontLeft.getCurrentPosition());
         telemetry.addData("FR Ticks:", driver.frontRight.getCurrentPosition());
